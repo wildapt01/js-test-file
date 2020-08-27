@@ -1,47 +1,33 @@
-// Test for Validation of Data
+//* Proof of concept: API request and web workers
 
-const incoming = [
-  { name: "AgencyID", value: "PRA" },
-  { name: "FSID", value: "L" },
-  { name: "Amount", value: "as5000" },
-  { name: "FundStart", value: "07/01/2019" },
-  { name: "FundEnd", value: "06/30/2020" },
-  { name: "FundNumber", value: "Ax-23-45-FO" },
-  { name: "Purpose", value: "Something usefusl" }
-];
+const mockUrl = "https://my.api.mockaroo.com/agency-sites.json?key=2fa979b0";
+let dataObj = [];
+let counter = 0;
 
-const validTest = list => {
-  const result = [];
-  for (let obj of list) {
-    switch (obj.name) {
-      case "Amount":
-        if (obj.value) {
-          obj.correct = Number(obj.value) ? true : false;
-        } else {
-          obj.correct = true;
-        }
-        break;
-      case "FundStart":
-        obj.correct = moment(obj.value, "MM/DD/YYYY", true).isValid();
-        break;
-
-      case "FundEnd":
-        obj.correct = moment(obj.value, "MM/DD/YYYY", true).isValid();
-        break;
-
-      default:
-        obj.correct = true;
-        break;
-    }
-    result.push(obj);
-  }
-  return result;
+const getDataFetch = async (url) => {
+  const response = await fetch(url);
+  counter++;
+  return response.json();
 };
 
-const validatedObject = validTest(incoming);
-const checkFlag = validatedObject.some(item => !item.correct);
-console.log("checkFlag :", checkFlag);
-if (checkFlag) {
-  document.querySelector("h2").style.color = "red";
-}
-document.body.append(`<div>${JSON.stringify(validatedObject)}</div>`);
+$(document).ready(() => {
+  const createView = async () => {
+    dataObj = await getDataFetch(mockUrl).then((data) => data.slice(0));
+
+    console.log("counter :>> ", counter);
+    const startIndex = Math.random() * 1000 - 10;
+    const dataSlice = await dataObj.slice(startIndex, startIndex + 10);
+    const headers = Object.keys(dataSlice[0]);
+    const headerRow = headers
+      .map((item) => `<th class="header">${item}</th>`)
+      .join("");
+    console.log("counter :>> ", counter);
+
+    const tableHead = `<thead>${headerRow}</thead>`;
+
+    return `<table>${tableHead}</table>`;
+  };
+
+  const table = createView();
+  $("body").append(`${table}`);
+});

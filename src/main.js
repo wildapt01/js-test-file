@@ -1,15 +1,28 @@
 // Logic
 
 $(document).ready(() => {
-  // Button action
+  // Button In storage action
+  $("#in").click((evnt) => {
+    evnt.stopPropagation();
+    const newEntry = JSON.stringify($("#entry-form").serializeArray());
+    sessionStorage.setItem("entry", newEntry);
+    console.log("<< Storage done! >>");
+    console.table(newEntry);
+  });
 
-  $(".input-zone").change((evnt) => {
-    evnt.preventDefault();
-    const entry = $(".input-zone").val();
-    console.log("entry :>> ", entry);
-    if (entry) {
-      const newURL = `../src/second.html/?val=${entry}`;
-      $(".link").attr("href", newURL);
+  // Button Out of storage action
+  $("#out").click((evnt) => {
+    evnt.stopPropagation();
+    const dataObj = JSON.parse(sessionStorage.getItem("entry"));
+    console.log("dataObj :>> ", dataObj);
+
+    for (const record of dataObj) {
+      const displayId = record.name.replace("entry", "display");
+      const prefix = record.name.startsWith("name") ? "Name: " : "Weight: ";
+      $(`#${displayId}`).text(`${prefix}  ${record.value}`);
     }
+
+    console.log("<< Extraction Done! >>");
+    sessionStorage.clear();
   });
 });

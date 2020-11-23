@@ -1,6 +1,21 @@
 /* Styling */
-.link {
-  border: 1px solid red;
+.link,
+.text-zone {
   line-height: 1.5em;
   height: 3em;
+  margin-bottom: 5%;
+}
+
+.blue {
+  border: 1px solid blue;
+}
+
+.red {
+  border: 1px solid red;
+}
+
+.input-container {
+  width: 100%;
+  margin: 3% 0 5% 10%;
+  font-size: 1.2em;
 }

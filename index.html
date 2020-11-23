@@ -17,8 +17,34 @@
     <title>Main Page</title>
   </head>
   <body>
-    <h2>Message in the main thread</h2>
-    <input class="input-zone" placeholder="Enter a number" />
-    <a class="link" type="text/html"> Click me to show another page </a>
+    <h2>Musketeers Weight</h2>
+    <div class="input-container">
+      <form id="entry-form">
+        <input
+          class="input-zone"
+          name="name-entry"
+          placeholder="Enter a name"
+        />
+        <input
+          class="input-zone"
+          name="value-entry"
+          placeholder="Enter a number"
+        />
+      </form>
+    </div>
+
+    <div class="input-container">
+      <div class="text-zone" id="name-display">Name:</div>
+      <div class="text-zone" id="value-display">Weight:</div>
+    </div>
+
+    <div class="input-container">
+      <button class="link blue" id="in" type="button">
+        Click me to save input
+      </button>
+      <button class="link red" id="out" type="button">
+        Click me to show Session Storage
+      </button>
+    </div>
   </body>
 </html>

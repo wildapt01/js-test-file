@@ -9,13 +9,6 @@
       defer
     ></script>
 
-    <!-- QUnit testing -->
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/qunit/qunit-2.15.0.css"
-    />
-    <script src="https://code.jquery.com/qunit/qunit-2.15.0.js" defer></script>
-
     <!-- Local script and style sheet -->
     <link rel="stylesheet" href="./src/style.css" type="text/css" />
 
@@ -24,7 +17,10 @@
     <title>Test Suite</title>
   </head>
   <body>
-    <div id="qunit"></div>
-    <div id="qunit-fixture"></div>
+    <div>The page URL is:</div>
+    <h3 id="myURL"></h3>
+
+    <button id="next-page-btn">Next Page</button>
+
   </body>
 </html>

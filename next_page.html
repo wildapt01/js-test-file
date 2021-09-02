@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- jQuery  -->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      defer
+    ></script>
+
+    <!-- Local script and style sheet -->
+    <link rel="stylesheet" href="./src/style.css" type="text/css" />
+
+    <script src="src/main.js" type="module" defer></script>
+
+    <title>Test Suite</title>
+  </head>
+  <body>
+
+    <div>This page URL is:</div>
+    <h3 id="myURL"></h3>
+
+    <div>The Student ID is:</div>
+    <h3 id="student"></h3>
+    <h3 id="new-student"></h3>
+    <h3 id="new-url"></h3>
+
+    <script>
+      const currentUrl=new URL(window.location.href)
+      const params=new URLSearchParams(currentUrl.search)
+
+      document.querySelector("#student").innerText=params.get("st_id")
+
+      params.set("st_id","0002")
+      document.querySelector("#new-student").innerText=params.toString()
+      document.querySelector("#new-url").innerText=currentUrl.origin+currentUrl.pathname+params.toString()
+
+    </script>
+
+  </body>
+</html>

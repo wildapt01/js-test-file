@@ -5,6 +5,7 @@
 //          "YYYY-MM-DD" ==> "MM/DD/YYYY"
 
 const dateISOToUS = (strDate) => {
+  // Boolean flag checking the 4 first characters are digits
   const startIsISO = /\d{4}/.test(strDate.substr(0, 4));
   const formattedDate = startIsISO
     ? strDate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$2/$3/$1")
